@@ -35,7 +35,7 @@ def findftp(domain):
 		# Write match to OUTPUTFILE
 		fHandle = open(SUMMARYFILE,'a')
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", robots.txt, " + str(req.code) + ", " + str(responseLines) + ", " + str(responseCharacters) + ", " + str(responseUseragents) + ", " + str(responseSitemaps) + ", " + str(responseAllows) + ", " + str(responseDisallows) )
+		fHandle.write(domain + ", robots.txt, " + str(req.code) + ", " + str(responseLines) + ", " + str(responseCharacters) + ", " + str(responseUseragents) + ", " + str(responseSitemaps) + ", " + str(responseAllows) + ", " + str(responseDisallows) + "\n" )
 		fHandle.close()
 
 		return
@@ -43,7 +43,7 @@ def findftp(domain):
 	except Exception as e:   
 		fHandle = open(SUMMARYFILE,'a')
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", ," + str(req.code) + ", , , , , , ")
+		fHandle.write(domain + ", ," + str(req.code) + ", , , , , , \n")
 		fHandle.close()
         	print("[*] Nope: " + domain + " :: " + str(req.code))
 		print(e)
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     print("Scanning...")
     #setup file
     fHandle = open(SUMMARYFILE,'a')
-    fHandle.write("domain, file, response, lines, characters, useragents, sitemaps, allows, disallows")
+    fHandle.write("domain, file, response, lines, characters, useragents, sitemaps, allows, disallows \n")
     fHandle.close()
     pool = Pool(processes=MAXPROCESSES)
     domains = open(DOMAINFILE, "r").readlines()
