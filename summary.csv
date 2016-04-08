@@ -1,0 +1,9 @@
+domain, file, response, lines, characters, useragents, sitemaps, allows, disallows 
+www.google.com, robots.txt, 200, 256, 6244, 3, 4, 42, 201
+dmu.ac.uk, robots.txt, 200, 7, 377, 1, 0, 0, 6
+dailymail.co.uk, robots.txt, 200, 131, 4200, 12, 28, 1, 66
+amazon.co.uk, robots.txt, 200, 74, 2354, 2, 6, 6, 58
+twitter.com, robots.txt, 200, 95, 1885, 3, 1, 19, 39
+instagram.com, robots.txt, 200, 5, 70, 1, 0, 0, 3
+yahoo.com, robots.txt, 200, 28, 1345, 1, 15, 0, 10
+facebook.com, robots.txt, 200, 228, 4718, 25, 0, 16, 158
