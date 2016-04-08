@@ -14,20 +14,41 @@ def findftp(domain):
 		req = urllib2.urlopen(request)
 		answer = req.read()
 				
-
-		# Write match to OUTPUTFILE
-		fHandle = open(OUTPUTFILE,'a')
-		fHandle.write(domain + ", robots.txt")
-		fHandle.close()
 		print("[*] Found robots: " + domain + " :: " + str(req.code))
+		
+		# Lets process the output
+		
+		## General File Statistics
+		responseLines = len(answer.split('\n'))
+		responseCharacters = len(answer)
+		
+		## UserAgents
+		responseUseragents = answer.count("User-agent")
+		
+		## Sitemaps
+		responseSitemaps = answer.count("Sitemap")
+		
+		## Disallows and Allows
+		responseAllows = answer.count("Allow")
+		responseDisallows = answer.count("Disallow")
+		
+		# Write match to OUTPUTFILE
+		fHandle = open(SUMMARYFILE,'a')
+		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
+		fHandle.write(domain + ", robots.txt, " + str(req.code) + ", " + str(responseLines) + ", " + str(responseCharacters) + ", " + str(responseUseragents) + ", " + str(responseSitemaps) + ", " + str(responseAllows) + ", " + str(responseDisallows) )
+		fHandle.close()
 		
 		#process the robots.txt file
 		print(answer)
 
 		return
 
-	except Exception as e:     
-        	print("[*] Nope: " + domain)
+	except Exception as e:   
+		fHandle = open(SUMMARYFILE,'a')
+		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
+		fHandle.write(domain + ", ," + str(req.code) + ", , , , , , ")
+		fHandle.close()
+        	print("[*] Nope: " + domain + " :: " + str(req.code))
 		print(e)
     
 
@@ -36,15 +57,21 @@ if __name__ == '__main__':
     # Parse arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--inputfile', default='domains.txt', help='input file')
-    parser.add_argument('-o', '--outputfile', default='output.txt', help='output file')
     parser.add_argument('-t', '--threads', default=200, help='threads')
     args = parser.parse_args()
 
-    DOMAINFILE=args.inputfile
-    OUTPUTFILE=args.outputfile
+    DOMAINFILE = args.inputfile
+    SUMMARYFILE = "summary.csv"
+    USERAGENTFILE = "useragents.csv"
+    SITEMAPFILE = "sitemaps.csv"
+    RULESFILE = "rules.csv"
     MAXPROCESSES=int(args.threads)
 
     print("Scanning...")
+    #setup file
+    fHandle = open(SUMMARYFILE,'a')
+    fHandle.write("domain, file, response, lines, characters, useragents, sitemaps, allows, disallows")
+    fHandle.close()
     pool = Pool(processes=MAXPROCESSES)
     domains = open(DOMAINFILE, "r").readlines()
     pool.map(findftp, domains)
