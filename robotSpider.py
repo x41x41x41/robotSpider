@@ -10,7 +10,7 @@ def findftp(domain):
     	try:
 		# TAKE A LOOK FOR robots.txt file
 		# Try to download http://target.tld/robots.txt
-		request = Request('http://' + domain + "/robots.txt")
+		request = Request('http://www.' + domain + "/robots.txt")
 		req = urllib2.urlopen(request)
 		answer = req.read(200).decode()
 
