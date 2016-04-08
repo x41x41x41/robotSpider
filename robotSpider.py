@@ -43,10 +43,9 @@ def findftp(domain):
 	except Exception as e:   
 		fHandle = open(SUMMARYFILE,'a')
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", ," + str(req.code) + ", , , , , , \n")
+		fHandle.write(domain + ", , " + str(e) +", , , , , , \n")
 		fHandle.close()
-        	print("[*] Nope: " + domain + " :: " + str(req.code))
-		print(e)
+        	print("[*] Nope: " + domain)
     
 
 if __name__ == '__main__':
