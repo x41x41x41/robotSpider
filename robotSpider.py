@@ -37,9 +37,6 @@ def findftp(domain):
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 		fHandle.write(domain + ", robots.txt, " + str(req.code) + ", " + str(responseLines) + ", " + str(responseCharacters) + ", " + str(responseUseragents) + ", " + str(responseSitemaps) + ", " + str(responseAllows) + ", " + str(responseDisallows) )
 		fHandle.close()
-		
-		#process the robots.txt file
-		print(answer)
 
 		return
 
