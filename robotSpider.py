@@ -8,20 +8,18 @@ def findftp(domain):
 	domain = domain.strip()
     
     	try:
-		# TAKE A LOOK FOR FTP Configuration file
-		# Try to download http://target.tld/sftp-config.json
-		request = Request('http://' + domain + "/sftp-config.json")
+		# TAKE A LOOK FOR robots.txt file
+		# Try to download http://target.tld/robots.txt
+		request = Request('http://' + domain + "/robots.txt")
 		req = urllib2.urlopen(request)
 		answer = req.read(200).decode()
 
-		# Check if refs/heads is in the file
-		if('refs/heads' in answer):
-		    # Write match to OUTPUTFILE
-		    fHandle = open(OUTPUTFILE,'a')
-		    fHandle.write(domain + ", sftp-config.json, "+req.headers.get('content-length')+"\n")
-		    fHandle.close()
-		    print("[*] Found config: " + domain)
-		    return
+		# Write match to OUTPUTFILE
+		fHandle = open(OUTPUTFILE,'a')
+		fHandle.write(domain + ", robots.txt, "+req.headers.get('content-length')+"\n")
+		fHandle.close()
+		print("[*] Found robots: " + domain)
+		return
 
 	except Exception as e:     
         	print("[*] Nope: " + domain)
