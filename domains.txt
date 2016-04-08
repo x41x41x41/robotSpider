@@ -1,5 +1,5 @@
 dmu.ac.uk
-google.com
+www.google.com
 dailymail.co.uk
 amazon.co.uk
 yahoo.com

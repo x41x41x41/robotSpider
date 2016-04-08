@@ -13,16 +13,22 @@ def findftp(domain):
 		request = Request('http://' + domain + "/robots.txt")
 		req = urllib2.urlopen(request)
 		answer = req.read()
+				
 
 		# Write match to OUTPUTFILE
 		fHandle = open(OUTPUTFILE,'a')
-		fHandle.write(domain + ", robots.txt, "+req.headers.get('content-length')+"\n")
+		fHandle.write(domain + ", robots.txt")
 		fHandle.close()
-		print("[*] Found robots: " + domain)
+		print("[*] Found robots: " + domain + " :: " + str(req.code))
+		
+		#process the robots.txt file
+		print(answer)
+
 		return
 
 	except Exception as e:     
         	print("[*] Nope: " + domain)
+		print(e)
     
 
 if __name__ == '__main__':
