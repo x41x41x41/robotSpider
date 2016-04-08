@@ -14,7 +14,7 @@ def findftp(domain):
 	answer = req.read()
 
 	# Write match to OUTPUTFILE
-  print "done"
+	print "done"
 	return
     
 domains = findftp("google.com");
