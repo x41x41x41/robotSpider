@@ -37,6 +37,38 @@ def findftp(domain):
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 		fHandle.write(domain + ", robots.txt, " + str(req.code) + ", " + str(responseLines) + ", " + str(responseCharacters) + ", " + str(responseUseragents) + ", " + str(responseSitemaps) + ", " + str(responseAllows) + ", " + str(responseDisallows) + "\n" )
 		fHandle.close()
+		
+		#Process line by line now
+		responseLines = answer.split('\n')
+		for responseLine in responseLines:
+			#print responseLine
+			if "user-agent:" in responseLine.lower():
+				useragent = responseLine.lower().replace("user-agent:", "").strip()
+		                # Write match to OUTPUTFILE
+                		fHandle = open(USERAGENTFILE, 'a')
+		                fHandle.write(domain + ", " + useragent + "\n")
+               			fHandle.close()
+				#print useragent
+			elif "disallow:" in responseLine.lower():
+				type = "disallow"
+				directory = responseLine.lower().replace("disallow:", "").strip()
+                                # Write match to OUTPUTFILE
+                                fHandle = open(RULESFILE, 'a')
+                                fHandle.write(domain + ", " + useragent + ", " + type + ", "+ directory + "\n")
+                                fHandle.close()
+                        elif "allow:" in responseLine.lower():
+                                type = "allow"
+                                directory = responseLine.lower().replace("allow:", "").strip()
+                                # Write match to OUTPUTFILE
+                                fHandle = open(RULESFILE, 'a')
+                                fHandle.write(domain + ", " + useragent + ", " + type + ", "+ directory + "\n")
+                                fHandle.close()
+                        elif "sitemap:" in responseLine.lower():
+                                sitemap = responseLine.lower().replace("sitemap:", "").strip()
+                                # Write match to OUTPUTFILE
+                                fHandle = open(SITEMAPFILE, 'a')
+                                fHandle.write(domain + ", " + sitemap + "\n")
+                                fHandle.close()
 
 		return
 
@@ -67,6 +99,15 @@ if __name__ == '__main__':
     #setup file
     fHandle = open(SUMMARYFILE,'a')
     fHandle.write("domain, file, response, lines, characters, useragents, sitemaps, allows, disallows \n")
+    fHandle.close()
+    fHandle = open(USERAGENTFILE,'a')
+    fHandle.write("domain, useragent \n")
+    fHandle.close()
+    fHandle = open(RULESFILE,'a')
+    fHandle.write("domain, useragent, type, directory \n")
+    fHandle.close()
+    fHandle = open(SITEMAPFILE,'a')
+    fHandle.write("domain, url \n")
     fHandle.close()
     pool = Pool(processes=MAXPROCESSES)
     domains = open(DOMAINFILE, "r").readlines()
