@@ -78,30 +78,25 @@ def findftp(domain):
 
 	except Exception as e:   
 		
-		# If it errored lets try something special (cough youtube.com cough)
-		headers = { 'User-Agent' : 'Mozilla/5.0' }
-		request = Request('http://' + domain + "/", None, headers)
+		# Not really worried about it at this point
+	
+	try:
+		# TAKE A LOOK FOR robots.txt file
+		# Try to download http://target.tld/robots.txt
+        	headers = { 'User-Agent' : 'Mozilla/5.0' }
+		request = Request(actualdomain+"/robots.txt", None, headers)
 		req = urllib2.urlopen(request)
-		actualdomain = req.geturl()
+		answer = req.read()
+		process(domain, req, answer)
 		
-		# Then reperform the action
-		try:
-			# TAKE A LOOK FOR robots.txt file
-			# Try to download http://target.tld/robots.txt
-	        	headers = { 'User-Agent' : 'Mozilla/5.0' }
-			request = Request(actualdomain+"/robots.txt", None, headers)
-			req = urllib2.urlopen(request)
-			answer = req.read()
-			process(domain, req, answer)
-			
-			return
-		
-		except Exception as e:  
-			fHandle = open(SUMMARYFILE,'a')
-			#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-			fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
-			fHandle.close()
-	        	print("[*] Nope: " + domain)
+		return
+	
+	except Exception as e:  
+		fHandle = open(SUMMARYFILE,'a')
+		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
+		fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
+		fHandle.close()
+        	print("[*] Nope: " + domain)
     
 
 if __name__ == '__main__':
