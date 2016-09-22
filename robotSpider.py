@@ -106,7 +106,7 @@ def findftp(domain):
 				#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 				fHandle.write(domain + ", , " + str(e) + " " + actualdomain + ", , , , , , \n")
 				fHandle.close()
-		        	print("[*] Nope (2nd try): " + domain " :: "+actualdomain)
+		        	print("[*] Nope (2nd try): " + domain + " :: "+actualdomain)
 			
 		except Exception as e:  
 			fHandle = open(SUMMARYFILE,'a')
