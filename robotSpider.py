@@ -147,8 +147,8 @@ if __name__ == '__main__':
     fHandle.close()
     pool = Pool(processes=MAXPROCESSES)
     domains = open(DOMAINFILE, "r").readlines()
-    #pool.map(findftp, domains)
-    for domain in domains:
-    	findftp(domain)
+    pool.map(findftp, domains)
+    #for domain in domains:
+    #	findftp(domain)
     	
     print("Finished")
