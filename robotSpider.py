@@ -7,7 +7,7 @@ from multiprocessing import Pool
 def findftp(domain):
 	domain = domain.strip()
     
-    	try:
+    try:
 		# TAKE A LOOK FOR robots.txt file
 		# Try to download http://target.tld/robots.txt
         headers = { 'User-Agent' : 'Mozilla/5.0' }
