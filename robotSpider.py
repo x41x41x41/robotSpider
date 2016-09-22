@@ -104,14 +104,14 @@ def findftp(domain):
 			except Exception as e:  
 				fHandle = open(SUMMARYFILE,'a')
 				#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-				fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
+				fHandle.write(domain + ", , " + str(e) + " " + actualdomain + ", , , , , , \n")
 				fHandle.close()
 		        	print("[*] Nope (3rd try): " + domain)
 			
 		except Exception as e:  
 			fHandle = open(SUMMARYFILE,'a')
 			#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-			fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
+			fHandle.write(domain + ", , " + str(e) + ", , , , , , \n")
 			fHandle.close()
 	        	print("[*] Nope (2nd try): " + domain)
 	     
