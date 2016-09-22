@@ -10,7 +10,8 @@ def findftp(domain):
     	try:
 		# TAKE A LOOK FOR robots.txt file
 		# Try to download http://target.tld/robots.txt
-		request = Request('http://' + domain + "/robots.txt")
+        headers = { 'User-Agent' : 'Mozilla/5.0' }
+		request = Request('http://' + domain + "/robots.txt", None, headers)
 		req = urllib2.urlopen(request)
 		answer = req.read()
 				
@@ -77,7 +78,7 @@ def findftp(domain):
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 		fHandle.write(domain + ", , " + str(e) +", , , , , , \n")
 		fHandle.close()
-        	print("[*] Nope: " + domain)
+        print("[*] Nope: " + domain)
     
 
 if __name__ == '__main__':
