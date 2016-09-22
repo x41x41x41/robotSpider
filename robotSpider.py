@@ -92,7 +92,7 @@ def findftp(domain):
 			try:
 				# TAKE A LOOK FOR robots.txt file
 				# Try to download http://target.tld/robots.txt
-				print("[*] Scan (2nd try): " + domain " :: "+actualdomain)
+				print("[*] Scan (2nd try): " + domain + " :: "+actualdomain)
 		        	headers = { 'User-Agent' : 'Mozilla/5.0' }
 				request = Request(actualdomain+"/robots.txt", None, headers)
 				req = urllib2.urlopen(request)
