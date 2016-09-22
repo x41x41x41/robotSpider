@@ -113,10 +113,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     DOMAINFILE = args.inputfile
-    SUMMARYFILE = args.inputfile+"_summary.csv"
-    USERAGENTFILE = args.inputfile+"_useragents.csv"
-    SITEMAPFILE = args.inputfile+"_sitemaps.csv"
-    RULESFILE = args.inputfile+"_rules.csv"
+    SUMMARYFILE = os.path.basename(args.inputfile)+"_summary.csv"
+    USERAGENTFILE = os.path.basename(args.inputfile)+"_useragents.csv"
+    SITEMAPFILE = os.path.basename(args.inputfile)+"_sitemaps.csv"
+    RULESFILE = os.path.basename(args.inputfile)+"_rules.csv"
     MAXPROCESSES=int(args.threads)
 
     print("Scanning...")
