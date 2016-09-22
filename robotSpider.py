@@ -84,7 +84,7 @@ def findftp(domain):
 		req = urllib2.urlopen(request)
 		fHandle = open(SUMMARYFILE,'a')
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", , " + str(e) + " " + req.geturl(), , , , , , \n")
+		fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
 		fHandle.close()
 		
         	print("[*] Nope: " + domain)
