@@ -77,8 +77,8 @@ def findftp(domain):
 		return
 
 	except Exception as e:   
-		
 		# Not really worried about it at this point
+		print("[*] Nope (1st try): " + domain)
 	
 	try:
 		# TAKE A LOOK FOR robots.txt file
@@ -96,7 +96,7 @@ def findftp(domain):
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 		fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
 		fHandle.close()
-        	print("[*] Nope: " + domain)
+        	print("[*] Nope (2nd try): " + domain)
     
 
 if __name__ == '__main__':
