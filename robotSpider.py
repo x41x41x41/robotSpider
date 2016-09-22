@@ -69,7 +69,7 @@ def findftp(domain):
 		# TAKE A LOOK FOR robots.txt file
 		# Try to download http://target.tld/robots.txt
 		print("[*] Scan (1st try): " + domain)
-        	headers = { 'User-Agent' : 'Mozilla/5.0' }
+        	headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36' }
 		request = Request('http://' + domain + "/robots.txt", None, headers)
 		req = urllib2.urlopen(request)
 		answer = req.read()
@@ -84,7 +84,7 @@ def findftp(domain):
 		# If it errored lets try something special (cough youtube.com cough)
 		try:
 			print("[*] Improving Domain: " + domain)
-			headers = { 'User-Agent' : 'Mozilla/5.0' }
+			headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36' }
 			request = Request('http://' + domain + "/", None, headers)
 			req = urllib2.urlopen(request)
 			actualdomain = req.geturl()
@@ -93,7 +93,7 @@ def findftp(domain):
 				# TAKE A LOOK FOR robots.txt file
 				# Try to download http://target.tld/robots.txt
 				print("[*] Scan (2nd try): " + domain + " :: "+actualdomain)
-		        	headers = { 'User-Agent' : 'Mozilla/5.0' }
+		        	headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36' }
 				request = Request(actualdomain+"/robots.txt", None, headers)
 				req = urllib2.urlopen(request)
 				answer = req.read()
