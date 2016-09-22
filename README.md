@@ -9,3 +9,9 @@ A simple python script that will collect and analyze the robots.txt file of webs
 2. Run the command `./robotSpider.py -i YOURINPUTFILE` for example `./robotSpider.py -i top-100.txt`
 
 3. The files will be output into the current directory, prefixed with the name of your input file
+
+##Interesting One Liners
+* Find any rules with "test" in the rules file `cat top-100_rules.csv | grep "test"`
+* Find any rules with "beta" in the rules file `cat top-100_rules.csv | grep "beta"`
+* Find any rules with "admin" in the rules file `cat top-100_rules.csv | grep "admin"`
+* Find any rules with ".pdf" or ".xls" or ".doc" in the rules file `cat top-100_rules.csv | grep ".pdf\|.xls\|.doc"`
