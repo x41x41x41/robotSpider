@@ -83,7 +83,7 @@ def findftp(domain):
 	
 		# If it errored lets try something special (cough youtube.com cough)
 		try:
-			print("[*] Scan (2nd try): " + domain)
+			print("[*] Improving Domain: " + domain)
 			headers = { 'User-Agent' : 'Mozilla/5.0' }
 			request = Request('http://' + domain + "/", None, headers)
 			req = urllib2.urlopen(request)
@@ -92,7 +92,7 @@ def findftp(domain):
 			try:
 				# TAKE A LOOK FOR robots.txt file
 				# Try to download http://target.tld/robots.txt
-				print("[*] Scan (3rd try): " + domain)
+				print("[*] Scan (2nd try): " + domain " :: "+actualdomain)
 		        	headers = { 'User-Agent' : 'Mozilla/5.0' }
 				request = Request(actualdomain+"/robots.txt", None, headers)
 				req = urllib2.urlopen(request)
@@ -106,14 +106,14 @@ def findftp(domain):
 				#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 				fHandle.write(domain + ", , " + str(e) + " " + actualdomain + ", , , , , , \n")
 				fHandle.close()
-		        	print("[*] Nope (3rd try): " + domain)
+		        	print("[*] Nope (2nd try): " + domain " :: "+actualdomain)
 			
 		except Exception as e:  
 			fHandle = open(SUMMARYFILE,'a')
 			#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
 			fHandle.write(domain + ", , " + str(e) + ", , , , , , \n")
 			fHandle.close()
-	        	print("[*] Nope (2nd try): " + domain)
+	        	print("[*] Domain did not resolve: " + domain)
 	     
       
 if __name__ == '__main__':
