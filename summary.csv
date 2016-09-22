@@ -1,3 +1,0 @@
-domain, file, response, lines, characters, useragents, sitemaps, allows, disallows 
-youtube.com, , HTTP Error 404: Not Found, , , , , , 
-microsoft.com, robots.txt, 200, 114, 4401, 1, 4, 25, 80
