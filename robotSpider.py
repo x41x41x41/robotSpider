@@ -68,6 +68,7 @@ def findftp(domain):
 	try:
 		# TAKE A LOOK FOR robots.txt file
 		# Try to download http://target.tld/robots.txt
+		print("[*] Scan (1st try): " + domain)
         	headers = { 'User-Agent' : 'Mozilla/5.0' }
 		request = Request('http://' + domain + "/robots.txt", None, headers)
 		req = urllib2.urlopen(request)
@@ -80,23 +81,44 @@ def findftp(domain):
 		# Not really worried about it at this point
 		print("[*] Nope (1st try): " + domain)
 	
-	try:
-		# TAKE A LOOK FOR robots.txt file
-		# Try to download http://target.tld/robots.txt
-        	headers = { 'User-Agent' : 'Mozilla/5.0' }
-		request = Request(actualdomain+"/robots.txt", None, headers)
-		req = urllib2.urlopen(request)
-		answer = req.read()
-		process(domain, req, answer)
+		# If it errored lets try something special (cough youtube.com cough)
+		try:
+			print("[*] Scan (2nd try): " + domain)
+			headers = { 'User-Agent' : 'Mozilla/5.0' }
+			request = Request('http://' + domain + "/", None, headers)
+			req = urllib2.urlopen(request)
+			actualdomain = req.geturl()
+			
+		except Exception as e:  
+			fHandle = open(SUMMARYFILE,'a')
+			#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
+			fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
+			fHandle.close()
+	        	print("[*] Nope (2nd try): " + domain)
+	        	
+	        	return
+	        	
+		# Then reperform the action
+		try:
+			# TAKE A LOOK FOR robots.txt file
+			# Try to download http://target.tld/robots.txt
+			print("[*] Scan (3rd try): " + domain)
+	        	headers = { 'User-Agent' : 'Mozilla/5.0' }
+			request = Request(actualdomain+"/robots.txt", None, headers)
+			req = urllib2.urlopen(request)
+			answer = req.read()
+			process(domain, req, answer)
+			
+			return
 		
-		return
-	
-	except Exception as e:  
-		fHandle = open(SUMMARYFILE,'a')
-		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
-		fHandle.close()
-        	print("[*] Nope (2nd try): " + domain)
+		except Exception as e:  
+			fHandle = open(SUMMARYFILE,'a')
+			#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
+			fHandle.write(domain + ", , " + str(e) + " " + req.geturl() + ", , , , , , \n")
+			fHandle.close()
+	        	print("[*] Nope (3rd try): " + domain)
+	        	
+	        	return
     
 
 if __name__ == '__main__':
