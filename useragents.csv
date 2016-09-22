@@ -384,3 +384,13 @@ baidu.com, easouspider
 baidu.com, *
 domain, useragent 
 microsoft.com, *
+domain, useragent 
+microsoft.com, *
+domain, useragent 
+microsoft.com, *
+domain, useragent 
+microsoft.com, *
+domain, useragent 
+microsoft.com, *
+youtube.com, mediapartners-google*
+youtube.com, *
