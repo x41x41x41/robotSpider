@@ -77,11 +77,17 @@ def findftp(domain):
 		return
 
 	except Exception as e:   
+		
+		# If it errored lets try something special (cough youtube.com cough)
+		headers = { 'User-Agent' : 'Mozilla/5.0' }
+		request = Request('http://' + domain + "/", None, headers)
+		req = urllib2.urlopen(request)
 		fHandle = open(SUMMARYFILE,'a')
 		#domain, file, response, lines, characters, useragents, sitemaps, allows, disallows
-		fHandle.write(domain + ", , " + str(e) +", , , , , , \n")
+		fHandle.write(domain + ", , " + str(e) + " " + req.geturl(), , , , , , \n")
 		fHandle.close()
-        print("[*] Nope: " + domain)
+		
+        	print("[*] Nope: " + domain)
     
 
 if __name__ == '__main__':
